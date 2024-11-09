@@ -7,13 +7,22 @@ import {
   Typography,
   Grid,
   CardActionArea,
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import config from "../config";
 
 function DocumentList() {
   const [documents, setDocuments] = useState([]);
+  const [newDocTitle, setNewDocTitle] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userUUID");
+  const [refreshDocuments, setRefreshDocuments] = useState(false);
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -26,7 +35,7 @@ function DocumentList() {
     };
 
     fetchDocuments();
-  }, []);
+  }, [refreshDocuments]);
 
   const handleDocumentClick = async (doc) => {
     const isCollaborator = doc.collaborators.some(
@@ -46,11 +55,68 @@ function DocumentList() {
     navigate(`/documents/${doc.documentId}`);
   };
 
+  const handleCreateDocument = async () => {
+    if (!newDocTitle) {
+      return;
+    }
+
+    try {
+      await axios.post(`${config.baseURL}/document/create`, {
+        title: newDocTitle,
+        ownerId: userId,
+      });
+
+      setRefreshDocuments((prev) => !prev);
+      setNewDocTitle("");
+      setOpenDialog(false);
+    } catch (error) {
+      console.error("Failed to create document:", error);
+    }
+  };
+
+  const handleDialogOpen = () => setOpenDialog(true);
+  const handleDialogClose = () => setOpenDialog(false);
+
   return (
     <div style={{ margin: "2rem" }}>
+      
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleDialogOpen}
+        style={{ marginBottom: "2rem" }}
+      >
+        Create New Document
+      </Button>
+
       <Typography variant="h4" gutterBottom>
         Available Documents
       </Typography>
+
+      <Dialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>Create New Document</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Document Title"
+            fullWidth
+            variant="outlined"
+            value={newDocTitle}
+            onChange={(e) => setNewDocTitle(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleCreateDocument} color="primary">
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Grid container spacing={2}>
         {documents.map((doc) => (
           <Grid item xs={12} sm={6} md={4} key={doc.documentId}>
