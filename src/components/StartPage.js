@@ -11,7 +11,7 @@ const StartPage = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.get(`${config.baseURL}/user/${username}`);
-      localStorage.setItem('userUUID', response.data.uuid)
+      localStorage.setItem('userUUID', response.data.userID)
       navigate('/documents');
     } catch (error) {
       console.error('Error creating user:', error);

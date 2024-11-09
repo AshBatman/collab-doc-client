@@ -35,7 +35,7 @@ function DocumentList() {
 
     if (!isCollaborator) {
       try {
-        await axios.post(`${config.baseURL}/document/collaborators`, {
+        await axios.put(`${config.baseURL}/document/collaborators`, {
           documentId: doc.documentId,
           userId: userId,
         });

@@ -21,6 +21,7 @@ const DocumentCollab = () => {
   const [socket, setSocket] = useState(null);
   const [collabs, seCollabs] = useState([]);
   const [title, setTitle] = useState([]);
+  const [ownerName, setOwnerName] = useState([]);
 
   useEffect(() => {
     const newSocket = io("http://localhost:5000");
@@ -35,6 +36,7 @@ const DocumentCollab = () => {
         console.log(response.data);
         seCollabs(response.data.collaborators);
         setTitle(response.data.title);
+        setOwnerName(response.data.ownerName);
       } catch (error) {
         console.error("Error fetching document:", error);
       }
@@ -98,13 +100,19 @@ const DocumentCollab = () => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Document - {title} - {documentId}
+            Document: {title} - Owner: &nbsp;
+            <Chip
+                key={1}
+                label={ownerName}
+                style={{ marginRight: "5px" }}
+              />
           </Typography>
           <Box>
-            {collabs.map((collab) => (
+            <span style={{marginRight: '1rem'}}>Collaborators:</span>
+            {collabs.map((collab, id) => (
               <Chip
-                key={collab.userId}
-                label={collab.userId}
+                key={id}
+                label={collab}
                 style={{ marginRight: "5px" }}
               />
             ))}
