@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Document Collaboration App - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a collaborative document editor built with **ReactJS**. It allows multiple users to collaborate on a document in real-time, leveraging technologies like **Socket.IO** for real-time communication and **Axios** for API requests. Users can edit and share documents, and all changes are reflected instantly across all users.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Real-Time Collaboration**: Multiple users can collaborate on the same document at the same time.
+- **Document Creation**: Users can create new documents and share them with collaborators.
+- **User registration**: Just type their name and join.
+- **User Roles**: Supports document owner and collaborators, with distinct permissions.
+- **Auto-Save**: Changes to the document are saved in real-time to the server.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **ReactJS**: A JavaScript library for building user interfaces.
+- **Socket.IO**: Real-time web socket communication to handle live document editing.
+- **Axios**: Promise-based HTTP client for making API requests to the backend.
+- **MongoDB**: Database used for storing user information and document data.
+- **Material UI**: React UI framework for building a modern and responsive design.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Make sure you have the following installed on your machine:
+- **Node.js** (>= v14.x.x)
+- **npm** or **Yarn**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Steps to Set Up the Project
 
-### `npm run eject`
+1. **Clone the repository**:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   git clone https://github.com/yourusername/document-collaboration-app.git
+   cd collab-doc-client
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Install dependencies:**:
+   ```
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Start the development server::**:
+   ```
+   npm start
+   ```
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Usage
 
-## Learn More
+### Add User
+- A user can enter their name to start collaboration.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Create New Document
+- Users can click on "Add new document" to create a new document, and they will become the owner of the document.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Add Collaborator
+- Any user can click on another user's document, and they will be automatically added as a collaborator.
 
-### Code Splitting
+### Real-Time Editing
+- As a user types or edits the document, all changes are immediately reflected on the screen for other collaborators.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Auto-Save
+- The document is automatically saved to the server in real-time to Redis, and at periodic intervals, it is written to MongoDB.
