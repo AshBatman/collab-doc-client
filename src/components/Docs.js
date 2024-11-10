@@ -13,7 +13,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
 } from "@mui/material";
+import HomeIcon from '@mui/icons-material/Home';
 import config from "../config";
 
 function DocumentList() {
@@ -77,10 +79,12 @@ function DocumentList() {
   const handleDialogOpen = () => setOpenDialog(true);
   const handleDialogClose = () => setOpenDialog(false);
 
+  const handleHomeClick = () => {
+    navigate("/");
+  };
+
   return (
     <div style={{ margin: "2rem" }}>
-      
-
       <Button
         variant="contained"
         color="primary"
@@ -89,6 +93,9 @@ function DocumentList() {
       >
         Create New Document
       </Button>
+      <IconButton onClick={handleHomeClick} style={{ marginBottom: '2rem', marginLeft: '2rem' }}>
+        <HomeIcon sx={{ color: 'primary.main' }} /> <p style={{marginLeft: '.5rem', fontSize: '1rem'}}>Home</p>
+      </IconButton>
 
       <Typography variant="h4" gutterBottom>
         Available Documents
