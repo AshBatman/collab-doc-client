@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import config from "../config";
+import { blue } from "@mui/material/colors";
 
 function DocumentList() {
   const [documents, setDocuments] = useState([]);
@@ -24,7 +25,9 @@ function DocumentList() {
   const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userUUID");
+  const userName = localStorage.getItem("userName");
   const [refreshDocuments, setRefreshDocuments] = useState(false);
+  
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -98,7 +101,7 @@ function DocumentList() {
       </IconButton>
 
       <Typography variant="h4" gutterBottom>
-        Available Documents
+        Available Documents - <span style={{ color: blue }}>Hi {userName}</span>
       </Typography>
 
       <Dialog open={openDialog} onClose={handleDialogClose}>
