@@ -149,7 +149,7 @@ const DocumentCollab = () => {
             placeholder="Start typing here..."
             style={{
               width: "100%",
-              height: "100%",
+              height: "100vh",
               fontFamily: "Arial, sans-serif",
               fontSize: "16px",
               border: "none",
